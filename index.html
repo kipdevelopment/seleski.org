@@ -134,6 +134,143 @@
         }
         
 
+		        
+        /* Recipe card styles */
+        .recipe-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .recipe-difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .recipe-difficulty.easy {
+            background-color: #10B981;
+            color: white;
+        }
+        
+        .recipe-difficulty.medium {
+            background-color: #F59E0B;
+            color: white;
+        }
+        
+        .recipe-difficulty.hard {
+            background-color: #EF4444;
+            color: white;
+        }
+
+        /* Recipe details modal */
+        .recipe-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .recipe-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .recipe-modal-content {
+            background-color: #1F2937;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .recipe-modal.active .recipe-modal-content {
+            transform: translateY(0);
+        }
+        
+        .recipe-step {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .recipe-step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.75rem;
+            height: 1.75rem;
+            background-color: #F59E0B;
+            color: white;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Ingredients list */
+        .ingredients-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ingredients-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: #F59E0B;
+        }
+               
+        /* Button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+
+        }
+        
+        .btn-yellow {
+            background-color: #F59E0B;
+            color: #000;
+        }
+        
+        .btn-yellow:hover {
+            background-color: #D97706;
+        }
+        
+        .btn-gray {
+            background-color: #4B5563;
+            color: #fff;
+        }
+        
+        .btn-gray:hover {
+            background-color: #374151;
+        }
+
 	
     </style>
 </head>
@@ -147,7 +284,8 @@
             </a>
             <div class="hidden md:flex space-x-6">
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link active text-yellow-400" data-page="home">Home</a>
-                <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="gallery">Gallery</a>
+                <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="recipes">Recipes</a>
+				<a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="gallery">Gallery</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="about">About</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
@@ -158,6 +296,7 @@
         <div id="mobile-menu" class="md:hidden hidden bg-gray-900 mt-2 rounded-lg p-4 absolute right-4 left-4 z-10">
             <div class="flex flex-col space-y-3">
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="home">Home</a>
+				<a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="recipes">Recipes</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="gallery">Gallery</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="about">About</a>
             </div>
@@ -233,6 +372,901 @@
                 </div>
             </div>
         </div>
+		
+		
+		
+		
+        <!-- Recipes Page -->
+        <div id="recipes-page" class="page-content hidden">
+            <div class="text-center mb-8" data-aos="fade-down">
+                <h1 class="text-3xl md:text-4xl font-bold text-white">Chicken Recipes</h1>
+                <p class="text-gray-400 mt-2">Delicious ways to prepare chicken</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Recipe 1 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up">
+                    <img 
+                        src="artwork/recipe_roast_chicken_with_herbs_and_vegetable_food_photography.png" 
+                        alt="Roast Chicken" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Classic Roast Chicken</h3>
+                            <span class="recipe-difficulty easy">Easy</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A simple yet delicious roast chicken with herbs and vegetables.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>1 hour 30 minutes</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="roast-chicken">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recipe 2 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="100">
+                    <img 
+                        src="artwork/recipe_chicken_curry_with_rice_food_photography.png" 
+                        alt="Chicken Curry" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Spicy Chicken Curry</h3>
+                            <span class="recipe-difficulty medium">Medium</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A flavorful curry with tender chicken pieces and aromatic spices.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>45 minutes</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="chicken-curry">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recipe 3 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="200">
+                    <img 
+                        src="artwork/recipe_chicken_cordon_bleu_with_side_salad_food_photography.png" 
+                        alt="Chicken Cordon Bleu" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Chicken Cordon Bleu</h3>
+                            <span class="recipe-difficulty hard">Hard</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Elegant stuffed chicken breasts with ham and cheese, breaded and baked.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>1 hour</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="chicken-cordon-bleu">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recipe 4 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up">
+                    <img 
+                        src="artwork/recipe_grilled_chicken_with_lemon_and_herbs_food_photography.png" 
+                        alt="Grilled Chicken" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Lemon Herb Grilled Chicken</h3>
+                            <span class="recipe-difficulty easy">Easy</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Juicy grilled chicken with a bright lemon and herb marinade.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>30 minutes</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="grilled-chicken">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recipe 5 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="100">
+                    <img 
+                        src="artwork/recipe_chicken_stir_fry_with_vegetables_food_photography.png" 
+                        alt="Chicken Stir Fry" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Quick Chicken Stir Fry</h3>
+                            <span class="recipe-difficulty easy">Easy</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A fast and healthy stir fry with chicken and colorful vegetables.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>20 minutes</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="chicken-stir-fry">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recipe 6 -->
+                <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="200">
+                    <img 
+                        src="artwork/recipe_chicken_pot_pie_with_golden_crust_food_photography.png" 
+                        alt="Chicken Pot Pie" 
+                        class="w-full h-64 object-cover"
+                        loading="lazy"
+                    >
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-white text-xl font-semibold">Homemade Chicken Pot Pie</h3>
+                            <span class="recipe-difficulty medium">Medium</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Comforting pot pie with a creamy chicken filling and flaky crust.</p>
+                        <div class="flex items-center text-gray-400 mb-4">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>1 hour 15 minutes</span>
+                        </div>
+                        <button class="btn btn-yellow w-full view-recipe-btn" data-recipe="chicken-pot-pie">
+                            <i class="fas fa-utensils mr-2"></i>
+                            View Preparation Steps
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recipe Modals -->
+        <!-- Roast Chicken Modal -->
+        <div id="roast-chicken-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Classic Roast Chicken</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_roast_chicken_with_herbs_and_vegetables_food_photograph.png" 
+                    alt="Roast Chicken" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>1 whole chicken (about 4-5 pounds)</li>
+                            <li>2 tablespoons olive oil</li>
+                            <li>2 tablespoons butter, softened</li>
+                            <li>3 cloves garlic, minced</li>
+                            <li>1 tablespoon fresh rosemary, chopped</li>
+                            <li>1 tablespoon fresh thyme, chopped</li>
+                            <li>1 lemon, halved</li>
+                            <li>Salt and freshly ground black pepper</li>
+                            <li>1 onion, quartered</li>
+                            <li>2 carrots, roughly chopped</li>
+                            <li>2 celery stalks, roughly chopped</li>
+                            <li>1 cup chicken broth</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>Roasting pan with rack</li>
+                            <li>Kitchen twine</li>
+                            <li>Meat thermometer</li>
+                            <li>Basting brush</li>
+                            <li>Sharp knife</li>
+                            <li>Cutting board</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>Preheat your oven to 425°F (220°C). Remove the chicken from the refrigerator and allow it to come to room temperature for about 30 minutes.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>Pat the chicken dry with paper towels, inside and out. This helps achieve crispy skin.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>In a small bowl, mix the softened butter with minced garlic, chopped rosemary, and thyme.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>Gently loosen the skin over the chicken breast and thighs, being careful not to tear it. Spread half of the herb butter mixture under the skin.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Rub the outside of the chicken with olive oil and the remaining herb butter. Season generously with salt and pepper.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Stuff the cavity with the lemon halves and a few sprigs of fresh herbs if desired.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Tie the legs together with kitchen twine and tuck the wing tips under the body.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Place the onion, carrots, and celery in the bottom of the roasting pan, then place the chicken on the rack above the vegetables.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Pour the chicken broth into the bottom of the pan.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">10</div>
+                        <p>Roast for 15 minutes at 425°F (220°C), then reduce the temperature to 375°F (190°C) and continue roasting for about 1 hour to 1 hour and 15 minutes, or until a meat thermometer inserted into the thickest part of the thigh registers 165°F (74°C).</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">11</div>
+                        <p>Baste the chicken with the pan juices every 20 minutes during cooking.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">12</div>
+                        <p>Once done, remove from the oven and let rest for 15 minutes before carving.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">13</div>
+                        <p>Serve with the roasted vegetables and drizzle with the pan juices.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chicken Curry Modal -->
+        <div id="chicken-curry-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Spicy Chicken Curry</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_chicken_curry_with_rice_food_photography.png" 
+                    alt="Chicken Curry" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>2 pounds boneless, skinless chicken thighs, cut into 1-inch pieces</li>
+                            <li>2 tablespoons vegetable oil</li>
+                            <li>1 large onion, finely chopped</li>
+                            <li>4 cloves garlic, minced</li>
+                            <li>2 tablespoons fresh ginger, grated</li>
+                            <li>2 tablespoons curry powder</li>
+                            <li>1 teaspoon ground cumin</li>
+                            <li>1 teaspoon ground coriander</li>
+                            <li>1/2 teaspoon turmeric</li>
+                            <li>1/4 teaspoon cayenne pepper (adjust to taste)</li>
+                            <li>1 can (14 oz) diced tomatoes</li>
+                            <li>1 can (14 oz) coconut milk</li>
+                            <li>1 cup chicken broth</li>
+                            <li>Salt and pepper to taste</li>
+                            <li>Fresh cilantro for garnish</li>
+                            <li>Cooked rice for serving</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>Large deep skillet or Dutch oven</li>
+                            <li>Sharp knife</li>
+                            <li>Cutting board</li>
+                            <li>Measuring spoons</li>
+                            <li>Wooden spoon</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>Season the chicken pieces with salt and pepper.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>Heat the vegetable oil in a large skillet or Dutch oven over medium-high heat.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>Add the chicken pieces in batches and cook until browned on all sides, about 5 minutes per batch. Remove and set aside.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>In the same pan, add the chopped onion and cook until softened, about 5 minutes.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Add the minced garlic and grated ginger, and cook for another minute until fragrant.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Add the curry powder, cumin, coriander, turmeric, and cayenne pepper. Stir and cook for 1 minute to toast the spices.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Add the diced tomatoes with their juice and stir, scraping up any browned bits from the bottom of the pan.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Return the chicken to the pan, along with any accumulated juices.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Pour in the coconut milk and chicken broth, and stir to combine.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">10</div>
+                        <p>Bring to a simmer, then reduce heat to low. Cover and cook for 20-25 minutes, or until the chicken is tender and the sauce has thickened slightly.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">11</div>
+                        <p>Taste and adjust seasoning with salt and pepper as needed.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">12</div>
+                        <p>Serve hot over cooked rice, garnished with fresh cilantro.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chicken Cordon Bleu Modal -->
+        <div id="chicken-cordon-bleu-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Chicken Cordon Bleu</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_chicken_cordon_bleu_with_side_salad_food_photography.png" 
+                    alt="Chicken Cordon Bleu" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>4 boneless, skinless chicken breasts</li>
+                            <li>8 thin slices of ham</li>
+                            <li>8 slices Swiss cheese</li>
+                            <li>1/2 cup all-purpose flour</li>
+                            <li>1 teaspoon salt</li>
+                            <li>1/2 teaspoon black pepper</li>
+                            <li>2 large eggs</li>
+                            <li>2 tablespoons milk</li>
+                            <li>1 cup panko breadcrumbs</li>
+                            <li>1/2 cup grated Parmesan cheese</li>
+                            <li>1 teaspoon dried thyme</li>
+                            <li>1/2 teaspoon garlic powder</li>
+                            <li>4 tablespoons butter, melted</li>
+                            <li>Cooking spray</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>Meat mallet</li>
+                            <li>Plastic wrap</li>
+                            <li>Toothpicks</li>
+                            <li>3 shallow dishes for breading station</li>
+                            <li>Baking sheet</li>
+                            <li>Wire rack</li>
+                            <li>Parchment paper</li>
+                            <li>Meat thermometer</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>Preheat the oven to 375°F (190°C). Line a baking sheet with parchment paper and place a wire rack on top. Spray the rack with cooking spray.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>Place the chicken breasts on a cutting board and cover with plastic wrap. Using a meat mallet, pound each chicken breast to about 1/4-inch thickness.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>Season each chicken breast with salt and pepper on both sides.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>Layer 2 slices of ham and 2 slices of Swiss cheese on each chicken breast.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Roll up each chicken breast tightly, tucking in the sides as you roll. Secure with toothpicks.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Set up a breading station: In the first shallow dish, mix the flour with salt and pepper. In the second dish, whisk together eggs and milk. In the third dish, combine panko breadcrumbs, Parmesan cheese, dried thyme, and garlic powder.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Dredge each rolled chicken breast first in the flour mixture, shaking off excess.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Next, dip into the egg mixture, allowing excess to drip off.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Finally, coat thoroughly in the breadcrumb mixture, pressing gently to adhere.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">10</div>
+                        <p>Place the breaded chicken rolls on the prepared wire rack.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">11</div>
+                        <p>Drizzle or brush each chicken roll with melted butter.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">12</div>
+                        <p>Bake in the preheated oven for 30-35 minutes, or until the chicken is golden brown and the internal temperature reaches 165°F (74°C).</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">13</div>
+                        <p>Remove from the oven and let rest for 5 minutes. Carefully remove the toothpicks before serving.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">14</div>
+                        <p>Slice each roll into medallions and serve with a side salad or your favorite vegetables.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grilled Chicken Modal -->
+        <div id="grilled-chicken-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Lemon Herb Grilled Chicken</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_grilled_chicken_with_lemon_and_herbs_food_photography.png" 
+                    alt="Grilled Chicken" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>4 boneless, skinless chicken breasts</li>
+                            <li>1/4 cup olive oil</li>
+                            <li>3 tablespoons fresh lemon juice</li>
+                            <li>2 cloves garlic, minced</li>
+                            <li>1 tablespoon fresh rosemary, chopped</li>
+                            <li>1 tablespoon fresh thyme, chopped</li>
+                            <li>1 tablespoon fresh parsley, chopped</li>
+                            <li>1 teaspoon lemon zest</li>
+                            <li>1 teaspoon salt</li>
+                            <li>1/2 teaspoon black pepper</li>
+                            <li>Lemon wedges for serving</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>Grill or grill pan</li>
+                            <li>Mixing bowl</li>
+                            <li>Whisk</li>
+                            <li>Tongs</li>
+                            <li>Meat thermometer</li>
+                            <li>Resealable plastic bag or shallow dish for marinating</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>In a mixing bowl, whisk together olive oil, lemon juice, minced garlic, chopped herbs, lemon zest, salt, and pepper.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>Place the chicken breasts in a resealable plastic bag or shallow dish.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>Pour the marinade over the chicken, making sure all pieces are well coated.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>Seal the bag or cover the dish and refrigerate for at least 30 minutes, or up to 4 hours for more flavor.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Preheat your grill or grill pan to medium-high heat.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Remove the chicken from the marinade, allowing excess to drip off.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Place the chicken on the preheated grill and cook for 5-7 minutes per side, or until the internal temperature reaches 165°F (74°C) and grill marks appear.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Transfer the grilled chicken to a clean plate and let rest for 5 minutes before serving.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Serve with fresh lemon wedges and a sprinkle of additional chopped herbs if desired.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chicken Stir Fry Modal -->
+        <div id="chicken-stir-fry-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Quick Chicken Stir Fry</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_chicken_stir_fry_with_vegetables_food_photography.png" 
+                    alt="Chicken Stir Fry" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>1 pound boneless, skinless chicken breasts, cut into thin strips</li>
+                            <li>2 tablespoons vegetable oil</li>
+                            <li>1 red bell pepper, sliced</li>
+                            <li>1 yellow bell pepper, sliced</li>
+                            <li>1 cup snap peas or snow peas</li>
+                            <li>1 cup broccoli florets</li>
+                            <li>1 carrot, julienned</li>
+                            <li>3 cloves garlic, minced</li>
+                            <li>1 tablespoon fresh ginger, grated</li>
+                            <li>3 tablespoons soy sauce</li>
+                            <li>1 tablespoon oyster sauce</li>
+                            <li>1 tablespoon honey</li>
+                            <li>1 teaspoon sesame oil</li>
+                            <li>1/4 teaspoon red pepper flakes (optional)</li>
+                            <li>2 green onions, sliced</li>
+                            <li>1 tablespoon sesame seeds</li>
+                            <li>Cooked rice for serving</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>Wok or large skillet</li>
+                            <li>Sharp knife</li>
+                            <li>Cutting board</li>
+                            <li>Small bowl for sauce</li>
+                            <li>Wooden spoon or spatula</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>In a small bowl, whisk together soy sauce, oyster sauce, honey, sesame oil, and red pepper flakes (if using). Set aside.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>Heat 1 tablespoon of vegetable oil in a wok or large skillet over high heat.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>Add the chicken strips and stir-fry for 4-5 minutes until golden brown and cooked through. Remove from the wok and set aside.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>Add the remaining tablespoon of oil to the wok.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Add the minced garlic and grated ginger, and stir-fry for 30 seconds until fragrant.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Add the bell peppers, snap peas, broccoli, and carrots. Stir-fry for 3-4 minutes until vegetables are crisp-tender.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Return the cooked chicken to the wok and pour the sauce over everything.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Toss everything together and cook for another 1-2 minutes until the sauce has thickened slightly and everything is well coated.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Remove from heat and stir in the sliced green onions.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">10</div>
+                        <p>Serve hot over cooked rice, garnished with sesame seeds.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chicken Pot Pie Modal -->
+        <div id="chicken-pot-pie-modal" class="recipe-modal">
+            <div class="recipe-modal-content p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Homemade Chicken Pot Pie</h2>
+                    <button class="text-gray-400 hover:text-white close-modal">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <img 
+                    src="artwork/prep_chicken_pot_pie_with_golden_crust_food_photography.png" 
+                    alt="Chicken Pot Pie" 
+                    class="w-full h-64 object-cover rounded-lg mb-6"
+                >
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Ingredients</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>2 refrigerated pie crusts (or homemade)</li>
+                            <li>1/3 cup butter</li>
+                            <li>1/3 cup all-purpose flour</li>
+                            <li>1/2 cup onion, diced</li>
+                            <li>1/2 cup celery, diced</li>
+                            <li>1/2 cup carrots, diced</li>
+                            <li>1/3 cup frozen peas</li>
+                            <li>1/2 teaspoon salt</li>
+                            <li>1/4 teaspoon black pepper</li>
+                            <li>1/4 teaspoon dried thyme</li>
+                            <li>1/4 teaspoon dried sage</li>
+                            <li>1 3/4 cups chicken broth</li>
+                            <li>2/3 cup milk</li>
+                            <li>2 1/2 cups cooked chicken, shredded or cubed</li>
+                            <li>1 egg, beaten (for egg wash)</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-yellow-400 mb-3">Kitchen Tools</h3>
+                        <ul class="text-gray-300 ingredients-list">
+                            <li>9-inch pie dish</li>
+                            <li>Large saucepan</li>
+                            <li>Whisk</li>
+                            <li>Wooden spoon</li>
+                            <li>Measuring cups and spoons</li>
+                            <li>Pastry brush</li>
+                            <li>Rolling pin (if using homemade crust)</li>
+                            <li>Knife or kitchen scissors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Preparation Steps</h3>
+                <div class="text-gray-300 space-y-4">
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">1</div>
+                        <p>Preheat the oven to 425°F (220°C).</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">2</div>
+                        <p>If using refrigerated pie crusts, let them come to room temperature according to package instructions.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">3</div>
+                        <p>In a large saucepan, melt butter over medium heat.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">4</div>
+                        <p>Add the diced onion, celery, and carrots. Cook for 5-7 minutes until vegetables begin to soften.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">5</div>
+                        <p>Stir in the flour, salt, pepper, thyme, and sage. Cook for 1 minute, stirring constantly.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">6</div>
+                        <p>Gradually stir in the chicken broth and milk, cooking and stirring until the mixture thickens and bubbles, about 5 minutes.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">7</div>
+                        <p>Stir in the cooked chicken and frozen peas. Remove from heat and set aside.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">8</div>
+                        <p>Place one pie crust in the bottom of a 9-inch pie dish.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">9</div>
+                        <p>Pour the chicken mixture into the pie crust.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">10</div>
+                        <p>Top with the second pie crust. Seal and crimp the edges. Cut several slits in the top crust to allow steam to escape.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">11</div>
+                        <p>Brush the top crust with beaten egg for a golden finish.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">12</div>
+                        <p>Bake for 30-35 minutes, or until the crust is golden brown.</p>
+                    </div>
+                    
+                    <div class="recipe-step">
+                        <div class="recipe-step-number">13</div>
+                        <p>Let stand for 10 minutes before serving to allow the filling to set.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button class="btn btn-gray close-modal">
+                        <i class="fas fa-times mr-2"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+		
 
         <!-- Gallery Page -->
         <div id="gallery-page" class="page-content hidden">
@@ -500,6 +1534,27 @@
                             }
 
 
+
+
+        // Recipe modal functionality
+        function openRecipeModal(recipeId) {
+            const modal = document.getElementById(`${recipeId}-modal`);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                trackEvent('recipe_viewed', `Viewed recipe: ${recipeId}`);
+            }
+        }
+
+        function closeRecipeModal() {
+            const activeModal = document.querySelector('.recipe-modal.active');
+            if (activeModal) {
+                activeModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize chicken images
@@ -530,7 +1585,9 @@
             // Set up mobile menu
             setupMobileMenu();
             
-            
+            // Set up recipe modals
+            setupRecipeModals();
+			
             // Set up slideshow controls
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
@@ -571,6 +1628,43 @@
             // Initialize animations
             initAnimations();
         });
+
+
+       // Setup recipe modals
+        function setupRecipeModals() {
+            // Setup view recipe buttons
+            const viewRecipeButtons = document.querySelectorAll('.view-recipe-btn');
+            viewRecipeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const recipeId = this.getAttribute('data-recipe');
+                    openRecipeModal(recipeId);
+                });
+            });
+
+            // Setup close buttons
+            const closeButtons = document.querySelectorAll('.close-modal');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closeRecipeModal);
+            });
+
+            // Close modal when clicking outside
+            const modals = document.querySelectorAll('.recipe-modal');
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeRecipeModal();
+                    }
+                });
+            });
+
+            // Close modal with escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeRecipeModal();
+                }
+            });
+        }
+
 
         // Initialize animations
         function initAnimations() {
