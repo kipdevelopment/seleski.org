@@ -15,6 +15,8 @@
     <link href="font-awesome/all.min.css" rel="stylesheet">
 	<script src="font-awesome/all.min.js" ></script>
 	
+	<script src="image_collection.js" ></script>
+	
     <!-- Use compiled Tailwind CSS instead of CDN -->
     <style>
         /*! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */
@@ -168,6 +170,9 @@
             background-color: #EF4444;
             color: white;
         }
+		
+
+        
 
         /* Recipe details modal */
         .recipe-modal {
@@ -285,7 +290,6 @@
             <div class="hidden md:flex space-x-6">
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link active text-yellow-400" data-page="home">Home</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="recipes">Recipes</a>
-				<a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="gallery">Gallery</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="about">About</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
@@ -297,7 +301,6 @@
             <div class="flex flex-col space-y-3">
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="home">Home</a>
 				<a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="recipes">Recipes</a>
-                <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="gallery">Gallery</a>
                 <a href="#" class="hover:text-yellow-400 transition-colors duration-300 nav-link" data-page="about">About</a>
             </div>
         </div>
@@ -321,40 +324,8 @@
                      <div class="bg-gray-900 bg-opacity-50  rounded-lg shadow-2xl">
 
                                  <div id="slideshow-container" class="relative w-full">
-                                    <div class="relative" style="padding-bottom: 56.25%;">
-                                        <img 
-                                            id="chicken-image-1" 
-											src="artwork/chicken_logo.png" 
-											alt="KIP Logo" 
-                                            class="w-full h-auto rounded-lg shadow-lg absolute top-0 left-0 transition-opacity duration-1000" 
-                                            loading="lazy"
-                                            style="z-index: 3; "
-                                        >
-                                        <img 
-                                            id="chicken-image-2" 
-											src="artwork/majestic_rooster_with_vibrant_plumage_on_black_background_dramatic_lighting.png" 
-											alt="Majestic Rooster" 
-                                            class="w-full h-auto rounded-lg shadow-lg absolute top-0 left-0 transition-opacity duration-1000 opacity-0" 
-                                            loading="lazy"
-                                            style="z-index: 0; "
-                                        >
-										
-                                             <img 
-                                                 id="chicken-image-3" 
-												 src="artwork/elegant_hen_with_beautiful_feather_detail_on_black_background_professional_photography.png"
-                                                 alt="Elegant Hen" 
-                                                 class="w-full h-auto rounded-lg shadow-lg absolute top-0 left-0 transition-opacity duration-1000 opacity-0" 
-                                                 loading="lazy"
-                                                 style="z-index: 0;"
-                                             >
-											    <img 
-                                                 id="chicken-image-4" 
-                                                 src="artwork/beautiful_detailed_realistic_chicken_with_colorful_feathers_on_black_background_studio_lighting.png" 
-                                                 alt="Beautiful Chicken" 
-                                                 class="w-full h-auto rounded-lg shadow-lg absolute top-0 left-0 transition-opacity duration-1000 opacity-0" 
-                                                 loading="lazy"
-                                                 style="z-index: 0;"
-                                                               >
+                                    <div id="image-list" class="relative" style="padding-bottom: 56.25%;">
+                                        
                                         <div id="image-loading" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70" style="z-index: 2;">
                                             <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-yellow-400 border-solid"></div>
                                         </div>
@@ -483,8 +454,11 @@
                         </button>
                     </div>
                 </div>
+				
+				
+				
                 
-                <!-- Recipe 5 -->
+                <!-- Recipe 6 -->
                 <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="100">
                     <img 
                         src="artwork/recipe_chicken_stir_fry_with_vegetables_food_photography.png" 
@@ -509,7 +483,7 @@
                     </div>
                 </div>
                 
-                <!-- Recipe 6 -->
+                <!-- Recipe 7 -->
                 <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg recipe-card" data-aos="fade-up" data-aos-delay="200">
                     <img 
                         src="artwork/recipe_chicken_pot_pie_with_golden_crust_food_photography.png" 
@@ -1268,58 +1242,6 @@
         </div>
 		
 
-        <!-- Gallery Page -->
-        <div id="gallery-page" class="page-content hidden">
-            <div class="text-center mb-8" data-aos="fade-down">
-                <h1 class="text-3xl md:text-4xl font-bold text-white">Chicken Gallery</h1>
-                <p class="text-gray-400 mt-2">A collection of beautiful chicken photographs</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="rounded-lg overflow-hidden shadow-lg" data-aos="fade-up">
-                    <!--  src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=white chicken with black background studio lighting&w=600&h=400&style=realistic" -->
-					<img 
-                        src="artwork/white_chicken_with_black_background_studio_lighting.png"
-						alt="White Chicken" 
-                        class="w-auto h-70 object-cover"
-                        loading="lazy"
-                    >
-                    <div class="bg-gray-900 p-4">
-                        <h3 class="text-white text-xl font-semibold">White Leghorn</h3>
-                        <p class="text-gray-400 mt-2">Known for their excellent egg production</p>
-                    </div>
-                </div>
-                
-                <div class="rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <!-- src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=brown chicken with black background studio lighting&w=600&h=400&style=realistic" -->
-					<img 
-                        src="artwork/brown_chicken_with_black_background_studio_lighting.png"
-                        alt="Brown Chicken" 
-                        class="w-auto h-70 object-cover"
-                        loading="lazy"
-                    >
-                    <div class="bg-gray-900 p-4">
-                        <h3 class="text-white text-xl font-semibold">Rhode Island Red</h3>
-                        <p class="text-gray-400 mt-2">A heritage breed known for hardiness</p>
-                    </div>
-                </div>
-                
-                <div class="rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                    <!-- src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=black chicken with black background studio lighting&w=600&h=400&style=realistic" -->
-					<img 
-                        src="artwork/black_chicken_with_black background_studio_lighting.png"
-						alt="Black Chicken" 
-                        class="w-auto h-70 object-cover"
-                        loading="lazy"
-                    >
-                    <div class="bg-gray-900 p-4">
-                        <h3 class="text-white text-xl font-semibold">Ayam Cemani</h3>
-                        <p class="text-gray-400 mt-2">Rare breed with black feathers, skin, and meat</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- About Page -->
         <div id="about-page" class="page-content hidden">
             <div class="max-w-3xl mx-auto text-white">
@@ -1386,34 +1308,13 @@
 
 
     <script>
-        // Image loading handlers
-        // Image loading handlers - Defined first to avoid reference errors
-        function imageLoaded(id) {
-            if (id) {
-                // console.log(`Image ${id} loaded successfully`);
-                document.getElementById('image-loading').style.display = 'none';
-
-            }
-        }
 
 
-
-        function retryLoadImage(id) {
-            const img = document.getElementById(`chicken-image-${id}`);
-            if (img) {
-                const timestamp = new Date().getTime();
-                img.src = img.src.split('?')[0] + '?' + timestamp;
-                document.getElementById('image-loading').innerHTML = `
-                    <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-yellow-400 border-solid"></div>
-                `;
-                
-            }
-        }
  
 		
 		        
         // Slideshow functionality
-        let currentSlide = 1;
+        let currentSlide = 0;
         let slideshowInterval;
         
         function startSlideshow() {
@@ -1423,13 +1324,16 @@
         }
         
         function showNextSlide() {
-            currentSlide = currentSlide >= 4 ? 1 : currentSlide + 1;
-            morphImages();
+			previousSlide = currentSlide
+            currentSlide = currentSlide >= (imageCollection.length -1) ? 0 : currentSlide + 1;
+            currentSlide = getWeightedRandomIndex ()
+			morphImages(previousSlide, currentSlide);
         }
         
         function showPrevSlide() {
-            currentSlide = currentSlide <= 1 ? 4 : currentSlide - 1;
-            morphImages();
+			previousSlide = currentSlide
+            currentSlide = currentSlide <= 0 ? (imageCollection.length -1) : currentSlide - 1;
+            morphImages(previousSlide, currentSlide);
         }
         
         function updateSlideVisibility() {
@@ -1460,72 +1364,51 @@
 
         };
 
-		function morphImages() {
-            const image1 = document.getElementById('chicken-image-1');
-            const image2 = document.getElementById('chicken-image-2');
-            const image3 = document.getElementById('chicken-image-3');
-			const image4 = document.getElementById('chicken-image-4');
+		function morphImages(prevSlide, newSlide) {
+            const prevImage = document.getElementById(`chicken-image-${prevSlide}`);
+			const newImage = document.getElementById(`chicken-image-${newSlide}`);
+           
 			const titleElement = document.getElementById('text-box')
 			
             
-                                if (image1 && image2 && image3 && image4) {
+                                if (prevImage && newImage) {
                                     // Reset any ongoing animations
-                                    image1.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
-                                    image2.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
-                                    image3.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
-									image4.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
+                                    prevImage.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
+                                    newImage.style.transition = 'opacity 1.5s ease-in-out, transform 1.5s ease-in-out';
+                                    
                                      
                                     // Reset all images to hidden first
-                                    image1.style.opacity = '0';
-                                    image2.style.opacity = '0';
-                                    image3.style.opacity = '0';
-									image4.style.opacity = '0';
+                                    prevImage.style.opacity = '0';
+                                    newImage.style.opacity = '0';
+                                   
 
                                     // Reset transforms
-                                    image1.style.transform = 'scale(1.05)';
-                                    image2.style.transform = 'scale(1.05)';
-                                    image3.style.transform = 'scale(1.05)';
-									image4.style.transform = 'scale(1.05)';
+                                    prevImage.style.transform = 'scale(1.05)';
+                                    newImage.style.transform = 'scale(1.05)';
+
                                      
                                     // Show the current slide
                                     setTimeout(() => {
-										if (currentSlide != 1) {
+										if (imageCollection[newSlide].isVisible == true) {
 											const heading = titleElement.querySelector('h1');
 											heading.textContent = 'Majestic Chickens';
 											const paragraph = titleElement.querySelector('p');
 											paragraph.textContent = 'Admire the beauty and elegance of these magnificent birds.';
 										
 										}
-                                        if (currentSlide === 1) {
-                                            image1.style.transform = 'scale(1)';
-                                            image1.style.opacity = '1';
+                                        if (imageCollection[newSlide].isVisible == false) {
+                                            newImage.style.transform = 'scale(1)';
+                                            newImage.style.opacity = '1';
 											// Hide title for first image
                                             if (titleElement) {
                                                 titleElement.style.opacity = '0';
                                                 titleElement.style.transform = 'translateY(-20px)';
                                                 titleElement.style.transition = 'opacity 1.5s ease, transform 1.5s ease';     
 											}
-                                        } else if (currentSlide === 2) {
-                                            image2.style.transform = 'scale(1)';
-                                            image2.style.opacity = '1';
-											// Show title for other images
-                                            if (titleElement) {
-                                                titleElement.style.opacity = '1';
-                                                titleElement.style.transform = 'translateY(0)';
-												titleElement.style.transition = 'opacity 1.5s ease, transform 1.5s ease'; 
-                                            }
-										} else if (currentSlide === 3) {
-                                            image3.style.transform = 'scale(1)';
-                                            image3.style.opacity = '1';
-											// Show title for other images
-                                            if (titleElement) {
-                                                titleElement.style.opacity = '1';
-                                                titleElement.style.transform = 'translateY(0)';
-												titleElement.style.transition = 'opacity 1.5s ease, transform 1.5s ease'; 
-                                            }
                                         } else {
-                                            image4.style.transform = 'scale(1)';
-                                            image4.style.opacity = '1';
+                                           
+                                            newImage.style.transform = 'scale(1)';
+                                            newImage.style.opacity = '1';
 											// Show title for other images
                                             if (titleElement) {
                                                 titleElement.style.opacity = '1';
@@ -1561,27 +1444,26 @@
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize chicken images
-            const chickenImage1 = document.getElementById('chicken-image-1');
-            const chickenImage2 = document.getElementById('chicken-image-2');
-			const chickenImage3 = document.getElementById('chicken-image-3');
-			const chickenImage4 = document.getElementById('chicken-image-4');
-            
-            if (chickenImage1) {
-                chickenImage1.onload = () => imageLoaded(1);
-            }
-            
-            if (chickenImage2) {
-                chickenImage2.onload = () => imageLoaded(2);
-            }
-			
-			if (chickenImage3) {
-                chickenImage3.onload = () => imageLoaded(3);
-            }
-			
-			if (chickenImage4) {
-                chickenImage4.onload = () => imageLoaded(4);
-            }
+		
+			// Create image elements
+            const imageList = document.getElementById('image-list');
+			const classList = 'w-full h-auto rounded-lg shadow-lg absolute top-0 left-0 transition-opacity duration-1000'
+            imageCollection.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.id = `chicken-image-${index}`;
+                img.src = image.filename;
+                img.alt = image.alt;
+                img.className = index === 0 ? classList : classList + ' opacity-0';
+                img.loading = 'lazy';
+                img.style.zIndex = index === 0 ? '3' : '0';
+                img.style.opacity = index === 0 ? '1' : '0';
+				
+                imageList.appendChild(img);
+
+            });
+			document.getElementById('image-loading').style.display = 'none';
+		
+	
             
             // Set up navigation
             setupNavigation();
