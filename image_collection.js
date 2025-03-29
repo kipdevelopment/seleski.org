@@ -174,29 +174,29 @@ const imageCollection = [
 		{
         filename: 'artwork/metalic_looking_robotics_chicken_black_background_studio_lighting_1.png',
         alt: 'Robotic Chicken',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Robo-Chickens',
+        description: 'Next-gen poultry meets cutting-edge tech in this sleek cybernetic bird.',
         isVisible: true
     },
 		{
         filename: 'artwork/metalic_looking_robotics_chicken_black_background_studio_lighting.png',
         alt: 'Robotic Chicken',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Robo-Chickens',
+        description: 'Next-gen poultry meets cutting-edge tech in this sleek cybernetic bird.',
         isVisible: true
     },
 		{
         filename: 'artwork/metalic_looking_boston_robotics_chicken_black_background_studio_lighting.png',
         alt: 'Robotic Chicken',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Robo-Chickens',
+        description: 'Next-gen poultry meets cutting-edge tech in this sleek cybernetic bird.',
         isVisible: true
     },
 		{
         filename: 'artwork/robotic_chicken_on_black_background_studio_lighting.png',
         alt: 'Robotic Chicken',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Robo-Chickens',
+        description: 'Next-gen poultry meets cutting-edge tech in this sleek cybernetic bird.',
         isVisible: true
     },
 		{
@@ -209,17 +209,32 @@ const imageCollection = [
 		{
         filename: 'artwork/rooster_neon_light_with_black_background_studio_lighting.png',
         alt: 'Rooster Neon',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Neon Chicken',
+        description: 'A vibrant neon light sculpture in the shape of a chicken, glowing brightly against a dark backdrop.',
         isVisible: true
     },
 		{
         filename: 'artwork/chicken_neon_light_with_black_background_dramatic_lighting.png',
         alt: 'Chicken Neon',
-		title: 'Majestic Chickens',
-        description: 'Admire the beauty and elegance of these magnificent birds.',
+		title: 'Neon Chicken',
+        description: 'A vibrant neon light sculpture in the shape of a chicken, glowing brightly against a dark backdrop.',
+        isVisible: true
+    },
+		{
+        filename: 'artwork/steampunk_chicken.png',
+        alt: 'Steampunk Rooster',
+		title: 'Brass & Feathers: The Steampunk Rooster',
+        description: 'Where Victorian engineering meets barnyard royalty - these mechanical marvels showcase the perfect fusion of brass, gears and feathers in stunning steampunk style.',
+        isVisible: true
+    },
+		{
+        filename: 'artwork/steampunk_chicken_1.png',
+        alt: 'Steampunk Rooster',
+		title: 'Brass & Feathers: The Steampunk Rooster',
+        description: 'Where Victorian engineering meets barnyard royalty - these mechanical marvels showcase the perfect fusion of brass, gears and feathers in stunning steampunk style.',
         isVisible: true
     }
+	
 	
 	
 	
